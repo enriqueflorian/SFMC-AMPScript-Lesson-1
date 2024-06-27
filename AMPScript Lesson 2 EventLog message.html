@@ -1,0 +1,42 @@
+%%[ 
+
+SET @ATTENDEDEVENT = Lookup('EventLog','AttendedEvent', 'ID', ID)
+
+IF @ATTENDEDEVENT == "True" THEN
+
+SET @messagge = "Thanks for comming the event"
+
+ELSEIF @ATTENDEDEVENT == "False" THEN
+
+SET @messagge = "Sorry you miss the event"
+
+ELSE
+
+SET @messagge = ""
+
+ENDIF
+
+SET @JOINDATEOUTPUT = FormatDate(JoinDate,"yyyy-MMMM-ddddd","","en-US")
+
+SET @PriceOutPut = Lookup('EventLog',' LuckyDoorPrize', 'ID', ID)
+
+SET @FormatPrize = FormatNumber(@PriceOutPut,"C0","en_US")
+
+]%%
+
+<table style="background-color:#ffffff;" class="tmp--container" width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="color:#404760;font-family:&quot;Salesforce Sans&quot;, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:18px;padding:25px 25px 5px 25px;vertical-align:top;" width="100%" align="left">
+                 
+                        <p>Hola %%Firstname%% <strong>%%=v(@messagge)=%%</strong> el dia %%=v(@JOINDATEOUTPUT)=%% Price: %%=v(@FormatPrize)=%% </p>
+                        
+                        <table class="tmp--full-width" align="left" width="100%">
+                            <tr>
+                                <td style="padding:20px 0 10px 0;">
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                  </td>
+              </tr>
+  </table>
