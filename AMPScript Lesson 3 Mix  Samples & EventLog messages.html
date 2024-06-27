@@ -1,0 +1,57 @@
+%%[ 
+
+SET @Attended = Lookup ("EventLog","AttendedEvent","ID", ID) 
+
+IF @Attended == "True" THEN
+
+SET @LookupRow = LookupRows('EventLog','ID', ID)
+SET @Row = Row(@LookupRow, 1)
+
+SET @messagge = "Thanks for comming the event" 
+
+SET @VoucherCode =Field(@Row, 'VoucherCode')
+
+SET @PriceOutPut =Field(@Row, 'LuckyDoorPrize')
+IF      @PriceOutPut == 5000 THEN SET @tc = "#3498db"
+ELSEIF  @PriceOutPut == 6000 THEN SET @tc = "#2ecc71" 
+ELSEIF  @PriceOutPut == 7000 THEN SET @tc = "#e74c3c"
+ELSE    SET @tc = "#000000"
+ENDIF
+
+SET @FormatPrize = FormatNumber(@PriceOutPut,"C0","en_US")
+
+SET @JoinDate = JoinDate
+SET @FormaDate = FormatDate(JoinDate,"yyyy-MMMM-ddddd","","en-US")
+
+SET @usedate = DateAdd (Now(),'30','D') 
+SET @UseFormaDate = FormatDate(@usedate,"yyyy-MMMM-dd","","en-US")
+
+]%%
+
+<table style="background-color:#ffffff;" class="tmp--container" width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="color:#404760;font-family:&quot;Salesforce Sans&quot;, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:18px;padding:25px 25px 5px 25px;vertical-align:top;" width="100%" align="left">
+                 
+                  <p>Hola %%Firstname%% Congratulacion you won a lucky door prize!</p><br>
+                  <p>Voucher Code: %%=v(@VoucherCode)=%%</p>
+                  <p>Value Vaucher: <span style="color: %%=v(@tc)=%%"> %%=v(@FormatPrize)=%%</span></p>
+                  <p>Fecha: %%=v(@FormaDate)=%% </p>
+                  <p>Used Before : %%=v(@UseFormaDate)=%% </p>
+
+                        
+                        <table class="tmp--full-width" align="left" width="100%">
+                            <tr>
+                                <td style="padding:20px 0 10px 0;">
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                  
+              
+  </td></tr></table>
+
+%%[ 
+ENDIF
+
+]%%
+
