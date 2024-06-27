@@ -1,0 +1,31 @@
+%%[ 
+
+SET @FN  = Firstname
+SET @ROL = Rol
+SET @EA  = EmailAddress
+
+
+IF EmailOptIn THEN == TRUE
+    SET @OPI = "Gracias por haber habilitado el consentimiento de contacto"  
+ELSE
+    SET @OPI = "Ten presente si deseas que te contactemos debes habilitar el consentimiento de contacto"
+ENDIF
+
+]%%
+
+<table style="background-color:#ffffff;" class="tmp--container" width="600" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td style="color:#404760;font-family:&quot;Salesforce Sans&quot;, Arial, sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:18px;padding:25px 25px 5px 25px;vertical-align:top;" width="100%" align="left">
+                 
+                        <p>Hola <strong>%%=V(@FN)=%%</strong> sabemos que tu rol dentro de la compañia es <strong> %%=Uppercase(V(@Rol))=%% </strong> y queremos verificar contigo si tu direccion de correo electronico es la adecuada <strong>%%=Lowercase(V(@EA))=%% </strong>, con los datos verificados podremos comunicarnos contigo siempre de la mejor manera, gracias por tu colaboracion!!!. <br><br>Ten presente que <strong>%%=Lowercase(V(@OPI))=%% </strong></p>
+                        
+                        <table class="tmp--full-width" align="left" width="100%">
+                            <tr>
+                                <td style="padding:20px 0 10px 0;">
+                                    <a style="border-radius:0px;background-color:#6c5f91;border-top:12px solid #6c5f91;border-bottom:12px solid #6c5f91;border-right:18px solid #6c5f91;border-left:18px solid #6c5f91;color:#ffffff;display:inline-block;font-family:&quot;Salesforce Sans&quot;, Arial, sans-serif;font-size:12px;font-style:normal;text-transform:uppercase;font-weight:normal;line-height:16px;text-align:center;text-decoration:none;" href="" target="_blank">Actualizar datos en el portal</a>
+                                </td>
+                            </tr>
+                        </table>
+                  </td>
+              </tr>
+  </table>
